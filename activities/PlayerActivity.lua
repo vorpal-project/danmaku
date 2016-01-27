@@ -39,7 +39,7 @@ function PlayerActivity:instance (obj)
 
   function obj.__accept:Load (engine)
     player = Player:singleton()
-    Body:create(Player:getId(player))
+    Body:create(Player:getId(player), 'player')
     engine:setEventHook('keypressed', 'KeyPressed', identity)
     engine:setEventHook('keyreleased', 'KeyReleased', identity)
     self:addTask 'UpdatePlayer'
