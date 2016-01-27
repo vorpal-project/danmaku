@@ -1,5 +1,5 @@
 
-local BootstrapActivity = require 'lux.class' :new{}
+local BootstrapActivity = class:new{}
 
 BootstrapActivity:inherit(require 'Activity')
 
@@ -9,6 +9,10 @@ function BootstrapActivity:instance (obj, ...)
 
   function obj.__accept:Load (engine)
     engine:loadServer 'ODA'
+    self:switch(
+      require 'activities.PlayerActivity' (),
+      require 'activities.GraphicsActivity' ()
+    )
   end
 
 end

@@ -15,6 +15,10 @@ function ODAServer:instance (obj)
     oda.tick(dt)
   end
 
+  function obj:pushCommand (id, ...)
+    soundtrack:pushCommand(id, ...)
+  end
+
   function obj:shutdown ()
     soundtrack:pushCommand 'stop'
     soundtrack = nil
