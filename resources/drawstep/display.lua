@@ -22,6 +22,17 @@ function kind.weak_shot (graphics, engine, id)
   graphics.circle('fill', 0, 0, .1, 8)
 end
 
+function kind.evil_square (graphics, engine, id)
+  graphics.setColor(200, 100, 100)
+  graphics.polygon('fill', 0, 0, .5, .5, -.5, .5)
+  graphics.setColor(250, 150, 150)
+  graphics.polygon('fill', 0, 0, .5, -.5, .5, .5)
+  graphics.setColor(120, 60, 60)
+  graphics.polygon('fill', 0, 0, -.5, -.5, .5, -.5)
+  graphics.setColor(150, 80, 80)
+  graphics.polygon('fill', 0, 0, -.5, .5, -.5, -.5)
+end
+
 local display = {}
 
 function display.update (dt)

@@ -2,9 +2,9 @@
 local Bullet        = class:new{}
 local Body          = require 'domain.Body'
 
-function Bullet:instance (obj, behaviour_name)
+function Bullet:instance (obj, behaviour_name, ...)
   
-  local behaviour = loadResource('behaviour', behaviour_name) (obj)
+  local behaviour = loadResource('behaviour', behaviour_name) (obj, ...)
   local done      = false
 
   function obj:body ()
@@ -25,8 +25,8 @@ function Bullet:instance (obj, behaviour_name)
 
 end
 
-function Bullet:build (pos, body_kind, behaviour_name)
-  local bullet, id = Bullet:create(true, behaviour_name)
+function Bullet:build (pos, body_kind, behaviour_name, ...)
+  local bullet, id = Bullet:create(true, behaviour_name, ...)
   local body = Body:create(id, body_kind)
   body:setPosition(pos)
   return bullet

@@ -9,7 +9,22 @@ function BulletActivity:instance (obj)
   self:super(obj)
 
   function obj.__accept:Load (engine)
+    self:addTask 'SpawnBullets'
     self:addTask 'UpdateBullets'
+  end
+
+  function obj.__task:SpawnBullets ()
+    local rand = love.math.random
+    while true do
+      for delay = 1,rand(200,400) do
+        self:yield()
+      end
+      for i=1,rand(1,3) do
+        Bullet:build(vec2:new{rand(-12,12), 30}, 'evil_square', 'slide_to',
+                     vec2:new{rand(-8,8), rand(6,12)})
+      end
+      self:yield()
+    end
   end
 
   function obj.__task:UpdateBullets ()
