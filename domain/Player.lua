@@ -1,7 +1,13 @@
 
-local Player = class:new{}
+local Player        = class:new{}
+local Body          = require 'domain.Body'
+local PlayerDomain  = require 'Domain' (Player)
 
 local singleton
+
+function Player:singleton ()
+  return singleton
+end
 
 function Player:instance (obj)
 
@@ -9,18 +15,22 @@ function Player:instance (obj)
   local spd = .1
   local shoot_delay = 0
   local shooting = false
-  local moving = {
-    up = false, down = false, left = false, right = false
-  }
+
+
+  function obj:move (dir)
+    local body = Body:get(PlayerDomain:getId(self))
+    local abs = dir:map(math.abs)
+    if abs.x > 0 then
+      dir.x = dir.x/abs.x
+    end
+    if abs.y > 0 then
+      dir.y = dir.y/abs.y
+    end
+    body:move(spd * dir)
+  end
 
 end
-
-local PlayerDomain = require 'Domain' (Player)
 
 singleton = PlayerDomain:create(true)
-
-function Player:singleton ()
-  return singleton
-end
 
 return PlayerDomain

@@ -1,5 +1,5 @@
 
-local GraphicsActivity = require 'lux.class' :new{}
+local GraphicsActivity = class:new{}
 
 GraphicsActivity:inherit(require 'Activity')
 

@@ -3,10 +3,14 @@ local Body = class:new{}
 
 function Body:instance (obj)
   
-  local x, y = 0, 0
+  local pos = vec2:new{}
 
   function obj:getPosition ()
-    return x, y
+    return pos:unpack()
+  end
+
+  function obj:move (diff)
+    pos:add(diff)
   end
 
 end
