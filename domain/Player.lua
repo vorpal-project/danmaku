@@ -1,6 +1,7 @@
 
 local Player        = class:new{}
 local Body          = require 'domain.Body'
+local Bullet        = require 'domain.Bullet'
 local PlayerDomain  = require 'Domain' (Player)
 
 local singleton
@@ -14,8 +15,6 @@ function Player:instance (obj)
   assert(not singleton, "Can only have one player!")
   local spd = .1
   local shoot_delay = 0
-  local shooting = false
-
 
   function obj:move (dir)
     local body = Body:get(PlayerDomain:getId(self))
@@ -27,6 +26,17 @@ function Player:instance (obj)
       dir.y = dir.y/abs.y
     end
     body:move(spd * dir)
+  end
+
+  function obj:shoot ()
+    if shoot_delay <= 0 then
+      local pos = Body:get(PlayerDomain:getId(self)):getPosition()
+      Bullet:build(pos + vec2:new{-.3,1}, 'weak_shot', 'straight')
+      Bullet:build(pos + vec2:new{.3,1}, 'weak_shot', 'straight')
+      shoot_delay = 5
+    else
+      shoot_delay = shoot_delay - 1
+    end
   end
 
 end

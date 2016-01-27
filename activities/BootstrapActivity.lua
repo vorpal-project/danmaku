@@ -11,6 +11,7 @@ function BootstrapActivity:instance (obj, ...)
     engine:loadServer 'ODA'
     self:switch(
       require 'activities.PlayerActivity' (),
+      require 'activities.BulletActivity' (),
       require 'activities.GraphicsActivity' ()
     )
   end

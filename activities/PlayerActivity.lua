@@ -21,6 +21,7 @@ function PlayerActivity:instance (obj)
   local moving = {
     up = false, down = false, left = false, right = false
   }
+  local shooting = false
 
   local function getDir ()
     dir = vec2:new{}
@@ -48,18 +49,25 @@ function PlayerActivity:instance (obj)
   function obj.__accept:KeyPressed (key)
     if move_keys[key] then
       moving[key] = true
+    elseif key == 'z' then
+      shooting = true
     end
   end
 
   function obj.__accept:KeyReleased (key)
     if move_keys[key] then
       moving[key] = false
+    elseif key == 'z' then
+      shooting = false
     end
   end
 
   function obj.__task:UpdatePlayer ()
     while true do
       player:move(getDir())
+      if shooting then
+        player:shoot()
+      end
       self:yield()
     end
   end

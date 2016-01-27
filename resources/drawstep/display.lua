@@ -18,6 +18,10 @@ function kind.player (graphics, engine, id)
   graphics.polygon('fill', 0, 0, .3, -.2, -.3, -.2)
 end
 
+function kind.weak_shot (graphics, engine, id)
+  graphics.circle('fill', 0, 0, .1, 8)
+end
+
 local display = {}
 
 function display.update (dt)
@@ -31,7 +35,7 @@ function display.draw (graphics, engine)
   graphics.scale(32, -32)
   for id,body in Body:all() do
     graphics.push()
-    graphics.translate(body:getPosition())
+    graphics.translate(body:getPosition():unpack())
     kind[body:getKind()] (graphics, engine, id)
     graphics.setColor(triple(255))
     graphics.pop()

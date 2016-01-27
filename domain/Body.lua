@@ -3,18 +3,22 @@ local Body = class:new{}
 
 function Body:instance (obj, kind)
   
-  local pos = vec2:new{}
+  local position = vec2:new{}
 
   function obj:getPosition ()
-    return pos:unpack()
+    return position:clone()
   end
 
   function obj:getKind ()
     return kind
   end
 
+  function obj:setPosition (pos)
+    position = pos:clone()
+  end
+
   function obj:move (diff)
-    pos:add(diff)
+    position:add(diff)
   end
 
 end
