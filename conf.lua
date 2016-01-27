@@ -6,4 +6,6 @@ function love.conf (t)
 
   t.window.title = "My UFO Game"
 
+  t.modules.audio = false
+
 end
