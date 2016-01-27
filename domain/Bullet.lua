@@ -20,6 +20,10 @@ function Bullet:instance (obj, behaviour_name, ...)
   end
 
   function obj:update ()
+    local pos = self:body():getPosition()
+    if math.abs(pos.x) > 30 or math.abs(pos.y) > 30 then
+      self:done()
+    end
     behaviour()
   end
 

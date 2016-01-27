@@ -1,5 +1,6 @@
 
 local BulletActivity  = class:new{}
+local Body            = require 'domain.Body'
 local Bullet          = require 'domain.Bullet'
 
 BulletActivity:inherit(require 'Activity')
