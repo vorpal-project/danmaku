@@ -2,7 +2,6 @@
 local Player        = class:new{}
 local Body          = require 'domain.Body'
 local Bullet        = require 'domain.Bullet'
-local PlayerDomain  = require 'Domain' (Player)
 
 local singleton
 
@@ -17,7 +16,7 @@ function Player:instance (obj)
   local shoot_delay = 0
 
   function obj:move (dir)
-    local body = Body:get(PlayerDomain:getId(self))
+    local body = Body:get(Player:getId(self))
     local abs = dir:map(math.abs)
     if abs.x > 0 then
       dir.x = dir.x/abs.x
@@ -30,7 +29,7 @@ function Player:instance (obj)
 
   function obj:shoot ()
     if shoot_delay <= 0 then
-      local pos = Body:get(PlayerDomain:getId(self)):getPosition()
+      local pos = Body:get(Player:getId(self)):getPosition()
       Bullet:build(pos + vec2:new{-.3,1}, 'weak_shot', 'straight')
       Bullet:build(pos + vec2:new{.3,1}, 'weak_shot', 'straight')
       shoot_delay = 5
@@ -41,6 +40,7 @@ function Player:instance (obj)
 
 end
 
-singleton = PlayerDomain:create(true)
+Player    = require 'Domain' (Player)
+singleton = Player:create(true)
 
-return PlayerDomain
+return Player

@@ -1,6 +1,5 @@
 
 local Bullet        = class:new{}
-local BulletDomain  = require 'Domain' (Bullet)
 local Body          = require 'domain.Body'
 
 function Bullet:instance (obj, behaviour_name)
@@ -9,7 +8,7 @@ function Bullet:instance (obj, behaviour_name)
   local done      = false
 
   function obj:body ()
-    return Body:get(BulletDomain:getId(self))
+    return Body:get(Bullet:getId(self))
   end
 
   function obj:done ()
@@ -27,10 +26,12 @@ function Bullet:instance (obj, behaviour_name)
 end
 
 function Bullet:build (pos, body_kind, behaviour_name)
-  local bullet, id = BulletDomain:create(true, behaviour_name)
+  local bullet, id = Bullet:create(true, behaviour_name)
   local body = Body:create(id, body_kind)
   body:setPosition(pos)
   return bullet
 end
 
-return BulletDomain
+Bullet = require 'Domain' (Bullet)
+
+return Bullet
