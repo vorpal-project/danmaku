@@ -8,7 +8,7 @@ function BootstrapActivity:instance (obj, ...)
   self:super(obj)
 
   function obj.__accept:Load (engine)
-    -- Start here
+    engine:loadServer 'ODA'
   end
 
 end

@@ -8,3 +8,6 @@
 /externals
 /scripts/ufo.lua
 /scripts/templates
+/oda.so
+/patches/openda_*.pd
+/patches/oggread*.pd*
