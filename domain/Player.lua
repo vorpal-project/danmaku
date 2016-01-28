@@ -30,8 +30,8 @@ function Player:instance (obj)
   function obj:shoot ()
     if shoot_delay <= 0 then
       local pos = Body:get(Player:getId(self)):getPosition()
-      Bullet:build(pos + vec2:new{-.3,1}, 'weak_shot', 'straight')
-      Bullet:build(pos + vec2:new{.3,1}, 'weak_shot', 'straight')
+      Bullet:build(pos + vec2:new{-.3,1}, 'weak_shot', 1, 1, 'straight')
+      Bullet:build(pos + vec2:new{.3,1}, 'weak_shot', 1, 1, 'straight')
       shoot_delay = 5
     else
       shoot_delay = shoot_delay - 1

@@ -5,6 +5,11 @@ local Bullet          = require 'domain.Bullet'
 
 BulletActivity:inherit(require 'Activity')
 
+local matchups = {
+  evil_square = 'weak_shot',
+  weak_shot = 'evil_square'
+}
+
 function BulletActivity:instance (obj)
   
   self:super(obj)
@@ -21,8 +26,8 @@ function BulletActivity:instance (obj)
         self:yield()
       end
       for i=1,rand(1,3) do
-        Bullet:build(vec2:new{rand(-12,12), 30}, 'evil_square', 'slide_to',
-                     vec2:new{rand(-8,8), rand(6,12)})
+        Bullet:build(vec2:new{rand(-12,12), 30}, 'evil_square', 10, 1,
+                     'slide_to', vec2:new{rand(-8,8), rand(6,12)})
       end
       self:yield()
     end
@@ -31,6 +36,19 @@ function BulletActivity:instance (obj)
   function obj.__task:UpdateBullets ()
     while true do
       local done = {}
+      for receiver_kind, deliver_kind in pairs(matchups) do
+        for body in Body:forKind(receiver_kind) do
+          local bullet = Bullet:forElement(body)
+          if bullet then
+            for _,other in body:collisionsWith(deliver_kind) do
+              local other_bullet = Bullet:forElement(other)
+              if other_bullet then
+                bullet:takeHitFrom(other_bullet)
+              end
+            end
+          end
+        end
+      end
       for id,bullet in Bullet:all() do
         bullet:update()
         if bullet:isDone() then
