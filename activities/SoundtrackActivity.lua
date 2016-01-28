@@ -15,6 +15,10 @@ function SoundtrackActivity:instance (obj, ...)
     self:addTask 'SendCommands'
   end
 
+  function obj.__accept:BulletHit ()
+    odaserver:pushCommand('hit')
+  end
+
   function obj.__task:SendCommands ()
     while true do
       odaserver:pushCommand('evilsquares', Body:getKindCount 'evil_square')

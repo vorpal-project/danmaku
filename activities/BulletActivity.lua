@@ -45,6 +45,9 @@ function BulletActivity:instance (obj)
               if other_bullet then
                 bullet:takeHitFrom(other_bullet)
               end
+              if receiver_kind == 'weak_shot' then
+                self:sendEvent 'BulletHit' ()
+              end
             end
           end
         end
