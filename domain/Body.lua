@@ -2,6 +2,7 @@
 local Body = class:new{}
 
 local groups = {}
+local count = setmetatable({}, { __index = function () return 0 end })
 
 local function checkCollision (body1, body2)
   local pos1, pos2    = body1:getPosition(), body2:getPosition()
@@ -24,9 +25,11 @@ function Body:instance (obj, kind)
 
   if not groups[kind] then
     groups[kind] = {}
+    count[kind] = 0
   end
 
   groups[kind][obj] = true
+  count[kind] = count[kind] + 1
 
   function obj:getKind ()
     return kind
@@ -74,8 +77,14 @@ function Body:forKind (kind)
   end
 end
 
+function Body:getKindCount (kind)
+  return count[kind]
+end
+
 function Body:onDestroy (body)
-  groups[body:getKind()][body] = nil
+  local kind = body:getKind()
+  groups[kind][body] = nil
+  count[kind] = count[kind] - 1
 end
 
 return require 'Domain' (Body)
