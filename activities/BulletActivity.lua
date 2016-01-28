@@ -26,7 +26,7 @@ function BulletActivity:instance (obj)
         self:yield()
       end
       for i=1,rand(1,3) do
-        Bullet:build(vec2:new{rand(-12,12), 30}, 'evil_square', 10, 1,
+        Bullet:build(vec2:new{rand(-12,12), 20}, 'evil_square', 10, 1,
                      'slide_to', vec2:new{rand(-8,8), rand(6,12)})
       end
       self:yield()
