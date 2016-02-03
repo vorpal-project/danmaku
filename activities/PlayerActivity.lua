@@ -67,6 +67,7 @@ function PlayerActivity:instance (obj)
       player:move(getDir())
       if shooting then
         player:shoot()
+        self:sendEvent 'BulletShot' ()
       end
       self:yield()
     end
