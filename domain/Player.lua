@@ -33,6 +33,7 @@ function Player:instance (obj)
       Bullet:build(pos + vec2:new{-.3,1}, 'weak_shot', 1, 1, 'straight')
       Bullet:build(pos + vec2:new{.3,1}, 'weak_shot', 1, 1, 'straight')
       shoot_delay = 5
+      return true
     else
       shoot_delay = shoot_delay - 1
     end

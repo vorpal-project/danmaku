@@ -65,8 +65,7 @@ function PlayerActivity:instance (obj)
   function obj.__task:UpdatePlayer ()
     while true do
       player:move(getDir())
-      if shooting then
-        player:shoot()
+      if shooting and player:shoot() then
         self:sendEvent 'BulletShot' ()
       end
       self:yield()
